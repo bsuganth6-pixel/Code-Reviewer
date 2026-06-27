@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureAudit — Code Security Review Platform</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="index-page">
+
+  <!-- Animated Grid Background -->
+  <div class="grid-bg"></div>
+  <div class="scan-line"></div>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">⬡</span>
+      <span class="brand-name">Secure<span class="accent">Audit</span></span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="review.html" class="nav-link">Analyze</a>
+      <a href="report.html" class="nav-link">Reports</a>
+      <a href="login.html" class="nav-btn">Launch →</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      AI-Powered Static Analysis Engine v2.4
+    </div>
+    <h1 class="hero-title">
+      Find Vulnerabilities<br/>
+      <span class="title-accent">Before Attackers Do</span>
+    </h1>
+    <p class="hero-sub">
+      Upload your code. Get instant security analysis powered by OWASP Top 10, CWE mappings,<br/>
+      and AI-driven remediation guidance. Supports Python, JavaScript, PHP, Java & more.
+    </p>
+    <div class="hero-actions">
+      <a href="review.html" class="btn-primary">
+        <span class="btn-icon">⚡</span> Start Code Audit
+      </a>
+      <a href="report.html" class="btn-ghost">View Sample Report →</a>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">47K+</div>
+        <div class="stat-label">Vulnerabilities Found</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Languages Supported</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <div class="stat-num">OWASP</div>
+        <div class="stat-label">Top 10 Coverage</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <div class="stat-num">&lt;30s</div>
+        <div class="stat-label">Avg Analysis Time</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="section-label">CAPABILITIES</div>
+    <h2 class="section-title">Everything You Need for Secure Code</h2>
+    <div class="features-grid">
+      <div class="feature-card" data-delay="0">
+        <div class="feature-icon">🔍</div>
+        <h3>Static Analysis</h3>
+        <p>Deep AST-level inspection for SQL injection, XSS, buffer overflows, insecure deserialization, and 50+ vulnerability patterns.</p>
+        <div class="feature-tags">
+          <span>AST Parsing</span><span>Pattern Match</span><span>Taint Tracking</span>
+        </div>
+      </div>
+      <div class="feature-card" data-delay="100">
+        <div class="feature-icon">🛡️</div>
+        <h3>OWASP Mapping</h3>
+        <p>Every finding is mapped to OWASP Top 10, CWE identifiers, and CVSS scores for precise risk prioritization.</p>
+        <div class="feature-tags">
+          <span>OWASP Top 10</span><span>CWE/CVE</span><span>CVSS Score</span>
+        </div>
+      </div>
+      <div class="feature-card" data-delay="200">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Remediation</h3>
+        <p>Get context-aware fix suggestions with secure code snippets, not just generic warnings. Powered by Claude AI.</p>
+        <div class="feature-tags">
+          <span>Auto Fix</span><span>Code Diff</span><span>Best Practices</span>
+        </div>
+      </div>
+      <div class="feature-card" data-delay="300">
+        <div class="feature-icon">📊</div>
+        <h3>Detailed Reports</h3>
+        <p>Exportable PDF/HTML reports with executive summaries, severity breakdowns, and line-by-line finding details.</p>
+        <div class="feature-tags">
+          <span>PDF Export</span><span>Timeline</span><span>Severity Chart</span>
+        </div>
+      </div>
+      <div class="feature-card" data-delay="400">
+        <div class="feature-icon">⚙️</div>
+        <h3>Multi-Language</h3>
+        <p>Analyze Python, JavaScript, PHP, Java, C/C++, Ruby, Go, and more with language-specific rule sets.</p>
+        <div class="feature-tags">
+          <span>Python</span><span>JavaScript</span><span>PHP</span>
+        </div>
+      </div>
+      <div class="feature-card" data-delay="500">
+        <div class="feature-icon">📋</div>
+        <h3>Compliance Check</h3>
+        <p>Verify against PCI-DSS, HIPAA, GDPR, and SOC 2 coding requirements with automated compliance scoring.</p>
+        <div class="feature-tags">
+          <span>PCI-DSS</span><span>HIPAA</span><span>SOC 2</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="cta-content">
+      <h2>Ready to Harden Your Code?</h2>
+      <p>Join developers who catch vulnerabilities before deployment.</p>
+      <a href="login.html" class="btn-primary large">Get Started Free →</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-brand">⬡ Secure<span class="accent">Audit</span></div>
+    <div class="footer-links">
+      <a href="#">Documentation</a>
+      <a href="#">API</a>
+      <a href="#">Privacy</a>
+    </div>
+    <div class="footer-copy">© 2025 SecureAudit · Built for Secure Code</div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

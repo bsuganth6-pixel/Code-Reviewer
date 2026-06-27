@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureAudit — Login</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="login-page">
+  <div class="grid-bg"></div>
+  <div class="scan-line"></div>
+
+  <div class="login-wrapper">
+    <!-- Left Panel -->
+    <div class="login-left">
+      <a href="index.html" class="nav-brand login-logo">
+        <span class="brand-icon">⬡</span>
+        <span class="brand-name">Secure<span class="accent">Audit</span></span>
+      </a>
+      <div class="login-pitch">
+        <h2>Secure Code.<br/>Safer Software.<br/><span class="accent">Smarter Audits.</span></h2>
+        <p>Analyze, identify, and remediate security vulnerabilities in your code before they become breaches.</p>
+      </div>
+      <div class="login-features">
+        <div class="lf-item"><span class="lf-icon">✓</span> OWASP Top 10 Detection</div>
+        <div class="lf-item"><span class="lf-icon">✓</span> AI-Generated Fix Suggestions</div>
+        <div class="lf-item"><span class="lf-icon">✓</span> Exportable Security Reports</div>
+        <div class="lf-item"><span class="lf-icon">✓</span> Multi-Language Support</div>
+      </div>
+    </div>
+
+    <!-- Right Panel — Form -->
+    <div class="login-right">
+      <div class="login-card">
+        <div class="login-tabs">
+          <button class="tab-btn active" id="signinTab" onclick="switchTab('signin')">Sign In</button>
+          <button class="tab-btn" id="signupTab" onclick="switchTab('signup')">Register</button>
+        </div>
+
+        <!-- Sign In Form -->
+        <div id="signinForm" class="auth-form active">
+          <h3 class="form-heading">Welcome Back</h3>
+          <p class="form-sub">Access your security dashboard</p>
+
+          <div class="input-group">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <span class="input-icon">✉</span>
+              <input type="email" id="loginEmail" placeholder="analyst@company.com" class="form-input"/>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="loginPassword" placeholder="••••••••••" class="form-input"/>
+              <button class="toggle-pw" onclick="togglePw('loginPassword', this)">👁</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="rememberMe"/>
+              <span class="checkbox-custom"></span>
+              Remember me
+            </label>
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </div>
+
+          <button class="btn-primary full" onclick="handleLogin()">
+            <span id="loginBtnText">Sign In →</span>
+          </button>
+
+          <div class="divider"><span>or continue with</span></div>
+          <div class="oauth-row">
+            <button class="oauth-btn" onclick="demoLogin()">🔑 Demo Account</button>
+            <button class="oauth-btn">🐙 GitHub</button>
+          </div>
+        </div>
+
+        <!-- Register Form -->
+        <div id="signupForm" class="auth-form">
+          <h3 class="form-heading">Create Account</h3>
+          <p class="form-sub">Start auditing code for free</p>
+
+          <div class="input-group">
+            <label>Full Name</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" placeholder="Security Analyst" class="form-input"/>
+            </div>
+          </div>
+          <div class="input-group">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <span class="input-icon">✉</span>
+              <input type="email" placeholder="analyst@company.com" class="form-input"/>
+            </div>
+          </div>
+          <div class="input-group">
+            <label>Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="regPassword" placeholder="Min 12 chars, mixed case, symbols" class="form-input" oninput="checkStrength(this.value)"/>
+            </div>
+            <div class="strength-bar">
+              <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <div class="strength-label" id="strengthLabel">Enter a password</div>
+          </div>
+          <div class="input-group">
+            <label>Role</label>
+            <div class="input-wrap">
+              <span class="input-icon">🛡</span>
+              <select class="form-input form-select">
+                <option>Security Engineer</option>
+                <option>Developer</option>
+                <option>Penetration Tester</option>
+                <option>DevSecOps</option>
+                <option>Student / Learning</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-primary full" onclick="handleRegister()">Create Account →</button>
+        </div>
+
+        <div id="loginMsg" class="login-msg"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

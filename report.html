@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureAudit — Security Report</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="report-page">
+  <div class="grid-bg"></div>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:10px;color:inherit">
+        <span class="brand-icon">⬡</span>
+        <span class="brand-name">Secure<span class="accent">Audit</span></span>
+      </a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="review.html" class="nav-link">Analyze</a>
+      <a href="report.html" class="nav-link active">Reports</a>
+      <a href="login.html" class="nav-btn">Account</a>
+    </div>
+  </nav>
+
+  <div class="report-layout">
+    <!-- SIDEBAR -->
+    <aside class="report-sidebar">
+      <div class="sidebar-header">Security Reports</div>
+
+      <div class="sidebar-search">
+        <input type="text" placeholder="🔍 Search reports..." class="sidebar-search-input" oninput="filterReports(this.value)"/>
+      </div>
+
+      <div class="sidebar-section-label">RECENT AUDITS</div>
+      <div id="reportsList" class="reports-list">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="sidebar-stats">
+        <div class="ss-item">
+          <div class="ss-num" id="totalScans">—</div>
+          <div class="ss-label">Total Scans</div>
+        </div>
+        <div class="ss-item">
+          <div class="ss-num" id="totalVulns">—</div>
+          <div class="ss-label">Issues Found</div>
+        </div>
+        <div class="ss-item">
+          <div class="ss-num" id="avgScore">—</div>
+          <div class="ss-label">Avg Score</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN REPORT CONTENT -->
+    <main class="report-main">
+      <div id="reportPlaceholder" class="report-placeholder">
+        <div class="placeholder-icon">📋</div>
+        <h3>Select a Report</h3>
+        <p>Choose a report from the sidebar or run a new analysis to see detailed security findings.</p>
+        <a href="review.html" class="btn-primary">Start New Analysis →</a>
+      </div>
+
+      <div id="reportContent" class="report-content" style="display:none">
+        <!-- Report Header -->
+        <div class="report-header-card">
+          <div class="rh-left">
+            <div class="report-badge" id="rBadgeLang">PYTHON</div>
+            <h2 class="report-filename" id="rFilename">app.py</h2>
+            <div class="report-meta">
+              <span id="rDate">📅 May 30, 2025</span>
+              <span id="rTime">⏱ 14.2s</span>
+              <span id="rLines">📄 147 lines</span>
+            </div>
+          </div>
+          <div class="rh-right">
+            <div class="big-score" id="rBigScore">
+              <div class="big-score-num" id="rScoreNum">42</div>
+              <div class="big-score-label">Security Score</div>
+              <div class="big-score-grade" id="rScoreGrade">F</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Score Bar Chart -->
+        <div class="severity-chart-card">
+          <div class="chart-title">Vulnerability Distribution</div>
+          <div class="severity-chart" id="severityChart">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- OWASP Coverage -->
+        <div class="owasp-card">
+          <div class="chart-title">OWASP Top 10 — Issues Detected</div>
+          <div class="owasp-grid" id="owaspGrid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Findings Detail -->
+        <div class="findings-detail-header">
+          <h3>Detailed Findings</h3>
+          <div class="findings-filter">
+            <button class="filter-btn active" onclick="filterFindings('all', this)">All</button>
+            <button class="filter-btn" onclick="filterFindings('critical', this)">Critical</button>
+            <button class="filter-btn" onclick="filterFindings('high', this)">High</button>
+            <button class="filter-btn" onclick="filterFindings('medium', this)">Medium</button>
+            <button class="filter-btn" onclick="filterFindings('low', this)">Low</button>
+          </div>
+        </div>
+        <div id="detailFindings" class="detail-findings"></div>
+
+        <!-- Recommendations -->
+        <div class="recommendations-card">
+          <div class="rec-header">
+            <span>🎯</span>
+            <h3>Secure Coding Recommendations</h3>
+          </div>
+          <div id="recList" class="rec-list"></div>
+        </div>
+
+        <!-- Export Actions -->
+        <div class="export-actions">
+          <button class="btn-primary" onclick="exportReport('pdf')">📄 Export PDF Report</button>
+          <button class="btn-secondary" onclick="exportReport('json')">⬇ Download JSON</button>
+          <button class="btn-secondary" onclick="window.location.href='review.html'">🔄 New Analysis</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureAudit — Code Review</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="review-page">
+  <div class="grid-bg"></div>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:10px;color:inherit">
+        <span class="brand-icon">⬡</span>
+        <span class="brand-name">Secure<span class="accent">Audit</span></span>
+      </a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="review.html" class="nav-link active">Analyze</a>
+      <a href="report.html" class="nav-link">Reports</a>
+      <a href="login.html" class="nav-btn">Account</a>
+    </div>
+  </nav>
+
+  <div class="review-layout">
+    <!-- LEFT: Config Panel -->
+    <aside class="config-panel">
+      <div class="panel-header">
+        <span class="panel-icon">⚙️</span>
+        <span>Audit Configuration</span>
+      </div>
+
+      <div class="config-section">
+        <label class="config-label">Programming Language</label>
+        <select class="config-select" id="langSelect">
+          <option value="python">🐍 Python</option>
+          <option value="javascript">🟨 JavaScript</option>
+          <option value="php">🐘 PHP</option>
+          <option value="java">☕ Java</option>
+          <option value="c">⚡ C/C++</option>
+          <option value="ruby">💎 Ruby</option>
+          <option value="go">🔷 Go</option>
+        </select>
+      </div>
+
+      <div class="config-section">
+        <label class="config-label">Analysis Depth</label>
+        <div class="depth-options">
+          <label class="depth-option">
+            <input type="radio" name="depth" value="quick" checked/>
+            <span class="depth-card">
+              <span class="depth-name">Quick Scan</span>
+              <span class="depth-time">~5s</span>
+            </span>
+          </label>
+          <label class="depth-option">
+            <input type="radio" name="depth" value="standard"/>
+            <span class="depth-card">
+              <span class="depth-name">Standard</span>
+              <span class="depth-time">~15s</span>
+            </span>
+          </label>
+          <label class="depth-option">
+            <input type="radio" name="depth" value="deep"/>
+            <span class="depth-card">
+              <span class="depth-name">Deep Audit</span>
+              <span class="depth-time">~30s</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <label class="config-label">Check Categories</label>
+        <div class="check-list">
+          <label class="check-item"><input type="checkbox" checked/> <span>Injection Flaws (SQLi, XSS, CMDi)</span></label>
+          <label class="check-item"><input type="checkbox" checked/> <span>Broken Authentication</span></label>
+          <label class="check-item"><input type="checkbox" checked/> <span>Sensitive Data Exposure</span></label>
+          <label class="check-item"><input type="checkbox" checked/> <span>Security Misconfigurations</span></label>
+          <label class="check-item"><input type="checkbox" checked/> <span>Vulnerable Dependencies</span></label>
+          <label class="check-item"><input type="checkbox" checked/> <span>Cryptographic Failures</span></label>
+          <label class="check-item"><input type="checkbox"/> <span>Business Logic Flaws</span></label>
+          <label class="check-item"><input type="checkbox"/> <span>Race Conditions</span></label>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <label class="config-label">Standard Templates</label>
+        <div class="template-btns">
+          <button class="tpl-btn" onclick="loadTemplate('sqli')">SQL Injection Sample</button>
+          <button class="tpl-btn" onclick="loadTemplate('xss')">XSS Vulnerable Code</button>
+          <button class="tpl-btn" onclick="loadTemplate('auth')">Broken Auth Example</button>
+          <button class="tpl-btn" onclick="loadTemplate('crypto')">Weak Crypto Sample</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER: Editor + Results -->
+    <main class="review-main">
+      <!-- Code Input -->
+      <div class="editor-section">
+        <div class="editor-header">
+          <div class="editor-tabs">
+            <button class="etab active" onclick="switchEditorTab('paste', this)">📋 Paste Code</button>
+            <button class="etab" onclick="switchEditorTab('upload', this)">📁 Upload File</button>
+          </div>
+          <div class="editor-actions">
+            <button class="editor-action-btn" onclick="clearEditor()">🗑 Clear</button>
+            <button class="editor-action-btn" onclick="copyCode()">📋 Copy</button>
+            <span class="line-count" id="lineCount">0 lines</span>
+          </div>
+        </div>
+
+        <div id="pasteTab" class="editor-tab-content active">
+          <div class="code-editor-wrap">
+            <div class="line-numbers" id="lineNumbers">1</div>
+            <textarea
+              id="codeInput"
+              class="code-editor"
+              placeholder="// Paste your code here for security analysis...
+// Example: Python, JavaScript, PHP, Java, C/C++, Ruby, Go
+//
+// SecureAudit will check for:
+// - SQL Injection, XSS, Command Injection
+// - Hardcoded secrets & weak cryptography
+// - Insecure authentication patterns
+// - And 50+ more vulnerability patterns"
+              spellcheck="false"
+              oninput="updateLineNumbers()"
+            ></textarea>
+          </div>
+        </div>
+
+        <div id="uploadTab" class="editor-tab-content">
+          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()" ondragover="dragOver(event)" ondrop="dropFile(event)" ondragleave="dragLeave(event)">
+            <div class="upload-icon">📂</div>
+            <div class="upload-text">Drop your code file here</div>
+            <div class="upload-sub">or click to browse · Max 500KB · .py .js .php .java .c .rb .go</div>
+            <input type="file" id="fileInput" style="display:none" accept=".py,.js,.php,.java,.c,.cpp,.rb,.go,.ts" onchange="handleFileUpload(event)"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analyze Button -->
+      <div class="analyze-bar">
+        <div class="analyze-info" id="analyzeInfo">
+          <span class="ai-badge">⚡ AI-Powered Analysis</span>
+          <span class="analyze-note">Results include OWASP mapping, severity ratings & fix suggestions</span>
+        </div>
+        <button class="btn-analyze" id="analyzeBtn" onclick="runAnalysis()">
+          <span id="analyzeBtnText">🔍 Analyze Code</span>
+          <div class="btn-pulse"></div>
+        </button>
+      </div>
+
+      <!-- Progress -->
+      <div class="analysis-progress" id="analysisProgress" style="display:none">
+        <div class="progress-steps">
+          <div class="prog-step" id="step1"><span class="step-icon">⟳</span> Parsing AST</div>
+          <div class="prog-step" id="step2"><span class="step-icon">⟳</span> Pattern Matching</div>
+          <div class="prog-step" id="step3"><span class="step-icon">⟳</span> OWASP Mapping</div>
+          <div class="prog-step" id="step4"><span class="step-icon">⟳</span> AI Analysis</div>
+          <div class="prog-step" id="step5"><span class="step-icon">⟳</span> Generating Report</div>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="resultsSection" class="results-section" style="display:none">
+        <!-- Summary Bar -->
+        <div class="results-summary">
+          <div class="summary-title">
+            <span class="summary-icon">🛡️</span>
+            <span>Analysis Complete</span>
+            <span class="summary-time" id="summaryTime"></span>
+          </div>
+          <div class="severity-pills">
+            <div class="sev-pill critical" id="critCount"><span>0</span> Critical</div>
+            <div class="sev-pill high" id="highCount"><span>0</span> High</div>
+            <div class="sev-pill medium" id="medCount"><span>0</span> Medium</div>
+            <div class="sev-pill low" id="lowCount"><span>0</span> Low</div>
+            <div class="sev-pill info" id="infoCount"><span>0</span> Info</div>
+          </div>
+          <div class="score-badge" id="scoreBadge">
+            <div class="score-label">Security Score</div>
+            <div class="score-num" id="scoreNum">--</div>
+          </div>
+        </div>
+
+        <!-- Findings List -->
+        <div class="findings-container" id="findingsContainer"></div>
+
+        <!-- Action Bar -->
+        <div class="results-actions">
+          <button class="btn-secondary" onclick="window.location.href='report.html'">📊 Full Report →</button>
+          <button class="btn-secondary" onclick="exportFindings()">⬇ Export JSON</button>
+          <button class="btn-ghost-sm" onclick="resetAnalysis()">🔄 New Analysis</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
